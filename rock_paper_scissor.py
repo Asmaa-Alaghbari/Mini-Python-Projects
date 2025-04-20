@@ -1,28 +1,32 @@
 import random
 
-rock_paper_scissors = ("r", "p", "s")
-rock_paper_scissors_icons = {"r": "🪨", "p": "📄", "s": "✂️"}
+ROCK = "r"
+PAPER = "p"
+SCISSORS = "s"
+
+rock_paper_scissors = {ROCK: "🪨", PAPER: "📄", SCISSORS: "✂️"}
+Choices = tuple(rock_paper_scissors.keys())
 
 
 def get_user_choice():
     while True:
         user_choice = input("Rock, paper, or scissors? (r/p/s): ").lower()
-        if user_choice in rock_paper_scissors:
+        if user_choice in Choices:
             return user_choice
         else:
             print("Invalid choice! Try again!")
 
 
 def display_chioces(user_choice, computer_choice):
-    print(f"You chose {rock_paper_scissors_icons[user_choice]}")
-    print(f"Computer chose {rock_paper_scissors_icons[computer_choice]}")
+    print(f"You chose {rock_paper_scissors[user_choice]}")
+    print(f"Computer chose {rock_paper_scissors[computer_choice]}")
 
 
 def determine_winner(user_choice, computer_choice):
     if (
-        (user_choice == "r" and computer_choice == "s")
-        or (user_choice == "p" and computer_choice == "r")
-        or (user_choice == "s" and computer_choice == "p")
+        (user_choice == ROCK and computer_choice == SCISSORS)
+        or (user_choice == PAPER and computer_choice == ROCK)
+        or (user_choice == SCISSORS and computer_choice == PAPER)
     ):
         print("You win! 🥳")
 
@@ -35,7 +39,7 @@ def determine_winner(user_choice, computer_choice):
 def play_game():
     while True:
         user_choice = get_user_choice()
-        computer_choice = random.choice(rock_paper_scissors)
+        computer_choice = random.choice(Choices)
 
         get_user_choice()
         display_chioces(user_choice, computer_choice)
